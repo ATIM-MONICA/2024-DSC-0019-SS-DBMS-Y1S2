@@ -47,9 +47,21 @@ INSERT INTO feeding_schedule(schedule_id, food, feeding_time, animal_id) VALUES
 (4, 'Fruits', '15:00', 3),
 (5, 'Mice', '20:00', 4);
 -- a)
-SELECT * FROM animal;
+SELECT animal.animal_name,habitat.habitat_name FROM animal
+INNER JOIN habitat ON animal.habitat_id = habitat.habitat_id;
+
 -- b)
+SELECT food, COUNT(*) AS total_feedings FROM feeding_schedule
+GROUP BY 
+    food;
+
 -- c)
+SELECT  a.animal_name FROM feeding_schedule fs JOIN animal a ON fs.animal_id = a.animal_id
+GROUP BY 
+    fs.animal_id, a.animal_name
+HAVING 
+    COUNT(fs.schedule_id) > 1;
+
 -- d) Four applications of DBMS
 -- RDBMS
 -- Maria DB
@@ -64,6 +76,12 @@ SELECT * FROM animal;
 -- Example FOREIGN KEY (animal_id) REFERENCES animal(animal_id)
 
 -- Qn.4
+--a ) MySQL components
+--Log files; Provides the error information and hint on fixing bug
+-- MySQL server; handling sql queries
+-- MySql worbench; connects the database to be queried or query excecution
+-- MySQL client
+-- Information schema; stores data about the databse for example tables and columns
 -- b)
 CREATE DATABASE IF NOT EXISTS student_db;
 USE student_db;
@@ -110,7 +128,8 @@ INSERT INTO Student (Code,Stud_id, Name) VALUES ( 'IMIS', 001,  'Info. Systems')
 DELETE FROM Student WHERE Stud_id = 001;
 
 -- c) Ordering Display
-SELECT * FROM Student ORDER BY  Code ASC;
+SELECT * FROM Student ORDER BY  Code ASC; 
+SELECT * FROM Student ORDER BY  Code DESC;
 
 -- Qn.1
 -- e)
